@@ -15,4 +15,8 @@ class Today extends Model
     {
         return $this->belongsTo(User::class);
     }
+    public function favorite_users()
+    {
+        return $this->belongsToMany(User::class, 'user_favorites', 'today_id', 'user_id')->withTimestamps();
+    }
 }

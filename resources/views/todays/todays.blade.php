@@ -21,6 +21,8 @@
                                 {!! Form::submit('削除', ['class' => 'btn btn-danger btn-sm']) !!}
                             {!! Form::close() !!}
                         @endif
+                         @include('user_favorite.favorite_button')
+                         
                     </div>
                 </div>
             </li>

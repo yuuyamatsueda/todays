@@ -58,7 +58,7 @@ class User extends Authenticatable
     }
     public function loadRelationshipCounts()
     {
-        $this->loadCount(['todays', 'followings', 'followers']);
+        $this->loadCount(['todays', 'followings', 'followers', 'favorites']);
     }
     /**
      * $userIdで指定されたユーザをフォローする。
@@ -128,5 +128,58 @@ class User extends Authenticatable
         $userIds[] = $this->id;
         // それらのユーザが所有する投稿に絞り込む
         return Today::whereIn('user_id', $userIds);
+    }
+    public function favorites()
+    {
+        return $this->belongsToMany(Today::class, 'user_favorites', 'user_id', 'today_id')->withTimestamps();
+    }
+    public function favorite($todayId)
+    {
+        // すでにお気に入りしているかの確認
+        $exist = $this->is_favoriting($todayId);
+
+        if ($exist) {
+            // すでにお気に入りしていれば何もしない
+            return false;
+        } else {
+            // 未お気に入りであればお気に入りする
+            $this->favorites()->attach($todayId);
+            return true;
+        }
+    }
+
+    /**
+     * $userIdで指定されたユーザをアンフォローする。
+     *
+     * @param  int  $userId
+     * @return bool
+     */
+    public function unfavorite($todayId)
+    {
+        // すでにフォローしているかの確認
+        $exist = $this->is_favoriting($todayId);
+        // // 相手が自分自身かどうかの確認
+        // $its_me = $this->id == $micropostId;
+
+        if ($exist) {
+            // すでにフォローしていればフォローを外す
+            $this->favorites()->detach($todayId);
+            return true;
+        } else {
+            // 未フォローであれば何もしない
+            return false;
+        }
+    }
+
+    /**
+     * 指定された $userIdのユーザをこのユーザがフォロー中であるか調べる。フォロー中ならtrueを返す。
+     *
+     * @param  int  $userId
+     * @return bool
+     */
+    public function is_favoriting($todayId)
+    {
+        // フォロー中ユーザの中に $userIdのものが存在するか
+        return $this->favorites()->where('today_id', $todayId)->exists();
     }
 }
