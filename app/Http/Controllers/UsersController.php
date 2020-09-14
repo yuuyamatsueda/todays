@@ -93,4 +93,31 @@ class UsersController extends Controller
             'todays' => $favorites,
             ]);
     }
+    public function edit($id)
+    {
+        $user = User::findOrFail($id);
+         
+     return view('users.edit', [
+         'user' => $user,
+         
+         ]);
+    }
+    public function update(Request $request, $id)
+    {
+        // バリデーション
+        $request->validate([
+            'name' => 'required|max:255',
+        ]);
+
+        // idの値でメッセージを検索して取得
+        $user = User::findOrFail($id);
+        // メッセージを更新
+        $user->name = $request->name;
+        $user->born = $request->born;
+        $user->introduction = $request->introduction;
+        $user->save();
+
+        // トップページへリダイレクトさせる
+        return redirect('/');
+    }
 }

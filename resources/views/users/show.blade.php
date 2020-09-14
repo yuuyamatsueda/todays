@@ -5,7 +5,7 @@
         <aside class="col-sm-4">
             {{-- ユーザ情報 --}}
             @include('users.card')
-            {!! Form::submit('編集', ['class' => "btn btn-primary btn-sm"]) !!}
+           {!! link_to_route('users.edit', '編集', ['user' => Auth::id()], ['class' => 'btn btn-lg btn-primary']) !!}
         </aside>
         <div class="col-sm-8">
             {{-- タブ --}}
