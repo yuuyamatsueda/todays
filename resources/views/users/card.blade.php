@@ -5,8 +5,7 @@
         <h3 class="card-title">{{ $user->introduction }}</h3>
     </div>
     <div class="card-body">
-        {{-- ユーザのメールアドレスをもとにGravatarを取得して表示 --}}
-        <img class="rounded img-fluid" src="{{ Gravatar::get($user->email, ['size' => 500]) }}" alt="">
+        <img src="{{ asset($user->profile_photo) }}">
     </div>
 </div>
 {{-- フォロー／アンフォローボタン --}}

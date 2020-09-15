@@ -14,8 +14,9 @@ class AddTitleToUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string('born');
-            $table->string('introduction');
+            $table->string('born')->nullable();
+            $table->string('introduction')->nullable();
+            $table->string('profile_photo')->nullable();
         });
     }
 

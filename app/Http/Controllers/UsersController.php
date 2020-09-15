@@ -104,6 +104,11 @@ class UsersController extends Controller
     }
     public function update(Request $request, $id)
     {
+        
+        // $file_name = $request->file('file')->getClientOriginalName();
+        // $request->file('file')->storeAs('profile_photo',$file_name);
+        // $user->profile_photo = $request->profile_photo;
+        // $user->save();
         // バリデーション
         $request->validate([
             'name' => 'required|max:255',
@@ -111,10 +116,16 @@ class UsersController extends Controller
 
         // idの値でメッセージを検索して取得
         $user = User::findOrFail($id);
+        
+        $file_name = $request->file('file')->getClientOriginalName();
+        $profilePhoto = $request->file('file')->storeAs('public/profile_photo', $file_name);
+        $user->profile_photo = \Storage::url($profilePhoto);
+        
         // メッセージを更新
         $user->name = $request->name;
         $user->born = $request->born;
         $user->introduction = $request->introduction;
+        
         $user->save();
 
         // トップページへリダイレクトさせる
