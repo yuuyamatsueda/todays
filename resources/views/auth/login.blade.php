@@ -18,8 +18,10 @@
                     {!! Form::label('password', 'パスワード') !!}
                     {!! Form::password('password', ['class' => 'form-control']) !!}
                 </div>
-
-                {!! Form::submit('ログイン', ['class' => 'btn btn-primary btn-block']) !!}
+                
+                <div class="offset-sm-4 col-sm-5">
+                    {!! Form::submit('ログイン', ['class' => 'btn btn-primary btn-block']) !!}
+                </div>    
             {!! Form::close() !!}
 
             {{-- ユーザ登録ページへのリンク --}}

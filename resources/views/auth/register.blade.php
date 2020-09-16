@@ -28,8 +28,10 @@
                     {!! Form::label('password_confirmation', 'パスワード確認') !!}
                     {!! Form::password('password_confirmation', ['class' => 'form-control']) !!}
                 </div>
-
-                {!! Form::submit('新規登録', ['class' => 'btn btn-primary btn-block']) !!}
+                
+                <div class="offset-sm-4 col-sm-5">
+                    {!! Form::submit('新規登録', ['class' => 'btn btn-primary btn-block']) !!}
+                </div>
             {!! Form::close() !!}
         </div>
     </div>
