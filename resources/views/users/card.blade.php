@@ -1,12 +1,8 @@
-<div class="card">
-    <div class="card-header">
-        <h3 class="card-title">{{ $user->name }}</h3>
-        <h3 class="card-title">{{ $user->born }}</h3>
-        <h3 class="card-title">{{ $user->introduction }}</h3>
-    </div>
-    <div class="card-body">
-        <img src="{{ asset($user->profile_photo) }}">
+<div style="width: 18rem;">
+    <div class="body">
+        <img class="rounded-circle" src="{{ asset($user->profile_photo) }}" width="200" height="200">
+            <div class="text">
+                @include('users.profile')
+            </div>
     </div>
 </div>
-{{-- フォロー／アンフォローボタン --}}
-@include('user_follow.follow_button')

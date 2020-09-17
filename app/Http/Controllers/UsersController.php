@@ -112,6 +112,7 @@ class UsersController extends Controller
         // バリデーション
         $request->validate([
             'name' => 'required|max:255',
+            'file' => 'required'
         ]);
 
         // idの値でメッセージを検索して取得

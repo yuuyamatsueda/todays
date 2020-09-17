@@ -14,7 +14,7 @@
              {{-- ユーザ一覧ページへのリンク --}}
                    
                     <li class="nav-item dropdown">
-                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">{{ Auth::user()->name }}</a>
+                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">More</a>
                         <ul class="dropdown-menu dropdown-menu-right">
                         {{-- ユーザ詳細ページへのリンク --}}
                             <li class="dropdown-item">{!! link_to_route('users.show', 'ユーザー詳細', ['user' => Auth::id()]) !!}</li>

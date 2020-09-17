@@ -2,18 +2,7 @@
 
 @section('content')
  @if (Auth::check())
-       <div class="row">
-            <aside class="col-sm-4">
-                {{-- ユーザ情報 --}}
-                @include('users.card')
-            </aside>
-            <div class="col-sm-8">
-                {{-- 投稿フォーム --}}
-                @include('todays.form')
-                {{-- 投稿一覧 --}}
-                @include('todays.todays')
-            </div>
-        </div>
+       @include('users.show')
     @else
     <div class="center">
         <div class="text-center">
